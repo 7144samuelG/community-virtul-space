@@ -1,6 +1,10 @@
-import { Search } from "./search";
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { signOut, uploadFile } from "@junobuild/core";
 import { nanoid } from "nanoid";
+import { useToast } from "@/components/ui/use-toast";
+import { initJuno, setDoc } from "@junobuild/core";
 import {
   Dialog,
   DialogClose,
@@ -14,61 +18,63 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { useAuthContext } from "@/stores/authcontext";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast";
-import { initJuno, setDoc, uploadFile } from "@junobuild/core";
-import { Mycommunities } from "./mycommunity";
-type Data = {
-  name: string;
-  topic: string;
-  avatarUrl:string
-};
+import { Events } from "./events";
 
-export const Main = () => {
-  const { user } = useAuthContext();
-  const router = useNavigate();
- 
-  if (!user) {
-    router("/");
-  }
+type DataDes = {
+  pollname: string;
+  topic: string;
+  avatar: string;
+};
+export const Notifications = () => {
+  const moths = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "November",
+    "December",
+  ];
+  const closeRef = useRef<ElementRef<"button">>(null);
+  const { toast } = useToast();
+  const [name, setName] = useState("");
+  const [topic, setTopic] = useState("");
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const[loading,setLoading]=useState<boolean>(false);
   const reload = () => {
     let event = new Event("reload");
     window.dispatchEvent(event);
   };
-  const [name, setName] = useState("");
-  const [topic, setTopic] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const closeRef = useRef<ElementRef<"button">>(null);
-  const[loading,setLoading]=useState<boolean>(false);
-  const { toast } = useToast();
   useEffect(() => {
     (async () =>
       await initJuno({
         satelliteId: "2aqvj-kiaaa-aaaal-ai4ga-cai",
       }))();
   }, []);
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   setLoading(true);
     try {
       let url;
-      if (file) {
+      if (avatar) {
         const filename: string = `${name}-${topic}`;
         const { downloadUrl } = await uploadFile({
-          collection: "communities_images",
-          data: file,
+          collection: "events_images",
+          data: avatar,
           filename,
         });
         url= downloadUrl;
         const key = nanoid();
-        const comData: Data = {
+        const comData: DataDes = {
           name: name,
           topic: topic,
-          avatarUrl:downloadUrl
+          avatar:downloadUrl
         };
         await setDoc<Data>({
-          collection: "communities",
+          collection: "events",
           doc: {
             key,
             data: comData,
@@ -77,7 +83,7 @@ export const Main = () => {
         });
         closeRef?.current?.click();
         toast({
-          title: "community have been created successfully",
+          title: "event have been created successfully",
         });
         setName("");
         setTopic("");
@@ -90,6 +96,10 @@ export const Main = () => {
       })
       console.error(err);
     }
+    setName("");
+    setTopic("");
+    window.location.reload();
+    reload();
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -98,27 +108,32 @@ export const Main = () => {
     setTopic(e.target.value);
   };
   const onChange3 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files?.[0] || null);
+    setAvatar(e.target.files?.[0] || null);
   };
-
   return (
-    <div className="pl-10 pt-10">
-      
-      <div className="border-b my-4" />
-      <h1 className="py-2 font-semibold">
-        Hello there,welcome to acme community virtual space
-      </h1>
-      <div className="flex justify-between space-x-2 items-center">
-        <p>Explore the hub for community updates and activities</p>
+    <div className="w-[30%] pt-4 pl-8 pr-4">
+      <div className="flex justify-end">
+        <Button variant="outline" onClick={signOut}>
+          sign-out
+        </Button>
+      </div>
+      <div>
+        <h1>
+          {moths[new Date().getMonth()]} {new Date().getFullYear()}
+        </h1>
+      </div>
+      <h1 className="font-semibold my-4">Events,activities,and tasks</h1>
+  
+      <div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline">new Community</Button>
+            <Button variant="outline">new Event</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Form a new Community</DialogTitle>
+              <DialogTitle>Create a new Event</DialogTitle>
               <DialogDescription>
-                Register a new community. Click save when you're done.
+                Register a new Event. Click save when you're done.
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={onSubmit} className="space-y-14">
@@ -157,7 +172,7 @@ export const Main = () => {
                     id="file"
                     defaultValue=""
                     type="file"
-                    placeholder="topic "
+                    placeholder="avatar "
                     className="col-span-3 pb-3"
                     onChange={onChange3}
                   />
@@ -177,8 +192,7 @@ export const Main = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <h1 className="font-semibold my-5">My Communities</h1>
-      <Mycommunities />
+      <Events />
     </div>
   );
 };

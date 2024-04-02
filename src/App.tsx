@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { initJuno } from "@junobuild/core";
 import { AuthContextProvider } from "./stores/authcontext";
 import Communities from "./pages/Communities";
+import Events from "./pages/Events";
 function App() {
   useEffect(() => {
     (async () =>
@@ -26,6 +27,7 @@ function App() {
             </Route>
           </Route>
           <Route path="/communities" element={<Communities/>}></Route>
+          <Route path="/events" element={<Events/>}></Route>
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>

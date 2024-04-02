@@ -24,9 +24,9 @@ export const Mycommunities = () => {
     
     (async () => await list())();
   }, [user]);
-console.log(data)
+
   return (
-    <div className="bg-gray-700 rounded-md p-5">
+    <div className=" rounded-md p-5">
       {data.length <= 0 ? (
         <>
           <div>
@@ -37,8 +37,8 @@ console.log(data)
         <>
           <div>
             {data.map((val) => (
-              <div key={val} className="flex flex-col space-y-5">
-                <Link to={`/chart?key=${val.key}`}  className="text-blue-500 underline">
+              <div key={val} className="flex flex-col space-y-5 items-start">
+                <Link to={`/chart?key=${val.key}`}  className="hover:underline pb-2">
                   {val.data.name}
                 </Link>
               </div>
