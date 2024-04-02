@@ -1,30 +1,18 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# VIRTUAL COMMUNITY SPACE PROJECT
+Objective:To create a virtual community where community members can gather.share ideas and engage in activities that support community buildng.
+#Technologies used
+Juno which is a framework for internent computer and React + TypeScript + Vite
+#implementations
+Is to create a virtual community center with different rooms for various activities e.g books clubs,exercise actvities
+Interactive platform:create an interactive platform where communities memmbers can host events,share stories and engage in discussion
+Accessibility tools:To ensure accessibility to all community we plan to include features like multiple language support,text to speech and ai chatbot
+#Features
+ 1.Multi-room setup:Allow users to create or join different rooms based on their interest
+ 2.Video conferencing:Integrate video conferencing capabilities for real time interactions during activities
+ 3.Chat functinality.Include chat features for instant messaging and group discussions
+ 4.Shared documemtation.Provide tools for sharing documentations and others materials to promote collaborative work
+ 5.Users profiles.Enable users to create their profiles with personal and achievements data to foster accessibility
+ 6.Accessibility.incoporate tools like text to speech ,ai chatbot among others for easier access by every person and smooth engagement
+ 7.Multiple language support.Offer multi language support to different people from different linguistic
+8.Privacy settings.Provide a customizable privancy setting to control what users can see and interact with users profile and seetings
+9.Moderation settings:Include tools for moderators to mnage content ,enforce rules and ensure a safe and respective environment
