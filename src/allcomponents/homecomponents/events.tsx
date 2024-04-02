@@ -7,24 +7,30 @@ export const Events = () => {
     const [data, setData] = useState<any[]>([]);
 
     const { user } = useAuthContext();
-    useEffect(() => {
-      window.addEventListener("reload", list);
-      return () => {
-        window.removeEventListener("reload", list);
-      };
-    }, []);
+    // useEffect(() => {
+    //   window.addEventListener("reload", list);
+    //   return () => {
+    //     window.removeEventListener("reload", list);
+    //   };
+    // }, []);
+    const reload=()=>{
+      let event=new Event("reload");
+      window.dispatchEvent(event);
+    }
+   
     const list = async () => {
       const { items } = await listDocs({
         collection: "events",
         filter: {},
       });
       setData(items);
+      reload()
     };
     useEffect(() => {
       
       (async () => await list())();
     }, [user]);
-    console.log(data)
+ 
   return (
     <div>
       <h1 className="font-semibold my-3">Your events</h1>

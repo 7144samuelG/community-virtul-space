@@ -28,11 +28,13 @@ export const NavBar = () => {
           <Link to="">Events</Link>
         </div>
         <div className="flex space-x-4">
-        <Button onClick={handleAuth}>{user?`${user}`:"sign-up"}</Button>
-        {user && (
-          <>
-            <Button onClick={()=>router("/home")}>Join now</Button>
-          </>
+        
+        {user?(
+          <div> <Button onClick={()=>router("/home")}>Join now</Button></div>
+        ):(
+          <div>
+             <Button onClick={handleAuth}>Sign Up</Button>
+          </div>
         )}
         </div>
       </div>

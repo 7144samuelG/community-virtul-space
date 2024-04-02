@@ -1,7 +1,27 @@
 
 import { Button } from "@/components/ui/button";
 import image from "../../assets/com.jpeg"
+import { useAuthContext } from "@/stores/authcontext";
+import { NFIDProvider, signIn } from "@junobuild/core";
+import { useNavigate } from "react-router-dom";
 export const About = () => {
+
+  const { user } = useAuthContext();
+  const navigate=useNavigate()
+  const handleAuth = async() => {
+    if (!user) {
+      await signIn({
+        provider: new NFIDProvider({
+          appName: "virtual community space",
+          logoUrl: "",
+        }),
+      });
+    } 
+    else{
+      navigate("/home")
+    }
+  };
+  
   return (
     <div className="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4">
       <div className="p-8 max-w-screen-2xl mx-auto">
@@ -20,7 +40,7 @@ export const About = () => {
               building a stronger community together
             </p>
             <div className="mt-[80px]">
-              <Button>Discover more</Button>
+              <Button onClick={handleAuth}>Discover more</Button>
             </div>
           </div>
 

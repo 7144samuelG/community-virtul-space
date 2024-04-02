@@ -50,6 +50,10 @@ export const Notifications = () => {
     const {toast}=useToast()
     const [name,setName]=useState("");
     const [topic,setTopic]=useState("");
+    const reload=()=>{
+      let event=new Event("reload");
+      window.dispatchEvent(event);
+    }
     const onSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
       e.preventDefault()
       const comData:Data={
@@ -71,8 +75,8 @@ export const Notifications = () => {
           })
           setName("")
       setTopic("");
-      
-      
+      window.location.reload()
+      reload();
      
   }
   const onChange=(e: React.ChangeEvent<HTMLInputElement>)=>{

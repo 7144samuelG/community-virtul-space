@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/stores/authcontext";
-import { listDocs } from "@junobuild/core";
+import { NFIDProvider, listDocs, signIn } from "@junobuild/core";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -20,6 +21,16 @@ export const Mycommunities = () => {
     });
     setData(items);
   };
+  const handleAuth = async() => {
+    if (!user) {
+      await signIn({
+        provider: new NFIDProvider({
+          appName: "virtual community space",
+          logoUrl: "",
+        }),
+      });
+    } 
+  };
   useEffect(() => {
     (async () => await list())();
   }, [user]);
@@ -28,9 +39,13 @@ export const Mycommunities = () => {
     <div className="p-5">
       {data.length <= 0 ? (
         <>
-          <div className="w-full h-[80vh] flex justify-center items-center">
+          <div className="w-full h-[80vh] flex flex-col justify-center items-center">
             <p>currently no community created</p>
-           
+           {!user &&(
+            <>
+            <Button onClick={handleAuth}>You must be logged in order to see available communities</Button>
+            </>
+           )}
           </div>
         </>
       ) : (
