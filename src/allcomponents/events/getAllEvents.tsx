@@ -52,14 +52,13 @@ export const Myevents = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center mt-6">
             {data.map((val) => (
-              <Link to={`/chart?key=${val.key}`} key={val}>
+              <Link to="" key={val}>
                 <div className="w-[200px] h-[200px]  space-y-5">
                 <div>
                   <img src={val.data.avatar} className="rounded-md"/>
                 </div>
                   <h1 className="font-semibold text-xl">name:{val.data.name}</h1>
                   <p className="opacity-60">topic:{val.data.topic}</p>
-                  <Button>Join</Button>
                 </div>
               </Link>
             ))}

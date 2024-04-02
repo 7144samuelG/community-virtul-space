@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, UsersRound } from "lucide-react";
+import { ArrowLeft, CalendarCheck2, Home, LogOut, SquareDashedKanban, UsersRound } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -11,17 +11,20 @@ export const Sidebar = () => {
       <div className="flex flex-col  items-center space-y-4">
         <ArrowLeft size={18} onClick={()=>router('/home')} className="cursor-pointer"/>
         <div className="flex flex-col space-y-6 pt-[70px]">
-          <Link to="">
+          <Link to="/">
+            <Home size={18} />
+          </Link>
+          <Link to="/communities">
             <UsersRound size={18} />
           </Link>
-          <Link to="">
-            <UsersRound size={18} />
+          <Link to="/events">
+            <CalendarCheck2 size={18} />
           </Link>
           <Link to="">
-            <UsersRound size={18} />
+            <SquareDashedKanban size={18} />
           </Link>
           <Link to="">
-            <UsersRound size={18} />
+            <LogOut size={18} />
           </Link>
         </div>
       </div>

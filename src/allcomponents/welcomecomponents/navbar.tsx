@@ -23,9 +23,9 @@ export const NavBar = () => {
           ACME Community
         </Link>
         <div className="space-x-10">
-          <Link to="communities">Communities</Link>
+          <Link to="/communities">Communities</Link>
+          <Link to="/events">Events</Link>
           <Link to="">Activities</Link>
-          <Link to="">Events</Link>
         </div>
         <div className="flex space-x-4">
           {user ? (

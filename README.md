@@ -53,3 +53,10 @@ Features
 10.Voting:user can raise an issue or an idea it can be voted
 
 11.Fund me:different users can create a fund me projects where diffrent users from diffrent communities can come together and fund that proejct if they found it in their interest
+
+
+
+To run this code clone the repo and npm install to install all dependencies
+
+
+Run npm run dev  to see the results

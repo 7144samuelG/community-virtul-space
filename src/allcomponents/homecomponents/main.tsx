@@ -102,7 +102,7 @@ export const Main = () => {
   };
 
   return (
-    <div className="pl-10 pt-10">
+    <div className="pl-10 pt-10 border-r pr-3">
       
       <div className="border-b my-4" />
       <h1 className="py-2 font-semibold">
