@@ -28,6 +28,7 @@ type Data = {
 export const Main = () => {
   const { user } = useAuthContext();
   const router = useNavigate();
+ 
   if (!user) {
     router("/");
   }
@@ -39,6 +40,8 @@ export const Main = () => {
   const [topic, setTopic] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const closeRef = useRef<ElementRef<"button">>(null);
+  const[loading,setLoading]=useState<boolean>(false);
+  const [error,setError]=useState("");
   const { toast } = useToast();
   useEffect(() => {
     (async () =>
@@ -48,7 +51,7 @@ export const Main = () => {
   }, []);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
+   setLoading(true);
     try {
       let url;
       if (file) {
@@ -82,6 +85,10 @@ export const Main = () => {
         reload();
       }
     } catch (err: any) {
+      setLoading(false);
+      toast({
+        title:"something went wrong"
+      })
       console.error(err);
     }
   };
@@ -152,7 +159,7 @@ export const Main = () => {
                     defaultValue=""
                     type="file"
                     placeholder="topic "
-                    className="col-span-3"
+                    className="col-span-3 pb-3"
                     onChange={onChange3}
                   />
                 </div>
@@ -164,7 +171,7 @@ export const Main = () => {
                       cancel
                     </Button>
                   </DialogClose>
-                  <Button type="submit">Save changes</Button>
+                  <Button type="submit" disabled={loading}>Save changes</Button>
                 </div>
               </DialogFooter>
             </form>

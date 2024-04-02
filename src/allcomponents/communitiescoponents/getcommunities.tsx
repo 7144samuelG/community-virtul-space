@@ -36,7 +36,7 @@ export const Mycommunities = () => {
   }, [user]);
   console.log(data);
   return (
-    <div className="p-5">
+    <div className="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4">
       {data.length <= 0 ? (
         <>
           <div className="w-full h-[80vh] flex flex-col justify-center items-center">
@@ -54,8 +54,12 @@ export const Mycommunities = () => {
             {data.map((val) => (
               <Link to={`/chart?key=${val.key}`} key={val}>
                 <div className="w-[200px] h-[200px]  space-y-5">
+                <div>
+                  <img src={val.data.avatarUrl} />
+                </div>
                   <h1 className="font-semibold text-xl">name:{val.data.name}</h1>
                   <p className="opacity-60">topic:{val.data.topic}</p>
+                  <Button>Join</Button>
                 </div>
               </Link>
             ))}

@@ -34,20 +34,8 @@ export const MessageBody = () => {
 //const flatarr=messagesKey.flat()
 //console.log(allMessages,"k")
   return (
-    <div className="bg-gray-700 rounded-md p-5">
-      {data.length <=0 ? (
-        <>
-          <div>
-            <p>you have not created any community</p>
-          </div>
-        </>
-      ) : (
-        <>
-          <div>
-            
-          </div>
-        </>
-      )}
+    <div className=" rounded-md p-5">
+      
     </div>
   );
 };

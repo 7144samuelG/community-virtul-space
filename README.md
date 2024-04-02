@@ -50,3 +50,6 @@ Features
 
 9.Moderation settings:Include tools for moderators to mnage content ,enforce rules and ensure a safe and respective environment
 
+10.Voting:user can raise an issue or an idea it can be voted
+
+11.Fund me:different users can create a fund me projects where diffrent users from diffrent communities can come together and fund that proejct if they found it in their interest
