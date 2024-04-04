@@ -6,6 +6,7 @@ import { Plus, Smile } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Doc, getDoc, setDoc } from "@junobuild/core";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 const formSchema = z.object({
   content: z.string().min(1),
 });
@@ -19,11 +20,15 @@ type already={
 interface messageData{
   messages: string[]; 
 }
+interface Messages{
+  id:number;
+  text:string;
+ }
 export const ChatInput = () => {
   const loaction = useLocation();
   const queryParams = new URLSearchParams(loaction.search);
   const id: string = queryParams.get("key") ?? "";
-  console.log(id);
+ const [messages,setMessages]=useState<Messages[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,6 +39,7 @@ export const ChatInput = () => {
 
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (value: z.infer<typeof formSchema>) => {
+    try{
     let fg: string[] = [];
     fg.push(value.content);
     console.log(fg, "st");
@@ -75,9 +81,16 @@ export const ChatInput = () => {
           data: updateData,
         },
       });
+       const newMessage:Messages={id:Date.now(),text:value.content};
+       const updatedMessages:any[]=[...Messages,newMessage];
+        setMessages(updatedMessages);
+       localStorage.setItem('chatMessages',JSON.stringify(updatedMessages))
+       value.content=""
     }
-
-    console.log(myDoc);
+}
+    catch(err){
+      console.log(err)
+    }
   };
   return (
     <Form {...form}>

@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { signOut } from "@junobuild/core";
 import { ArrowLeft, CalendarCheck2, Home, LogOut, SquareDashedKanban, UsersRound } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -23,9 +25,9 @@ export const Sidebar = () => {
           <Link to="">
             <SquareDashedKanban size={18} />
           </Link>
-          <Link to="">
+          <Button variant="outline" onClick={()=>signOut()}>
             <LogOut size={18} />
-          </Link>
+          </Button>
         </div>
       </div>
     </div>
